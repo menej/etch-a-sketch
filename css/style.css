@@ -21,6 +21,7 @@ body {
 }
 
 .grid-container {
+    flex: none;
     box-sizing: content-box;
     background-color: red;
     display: flex;
