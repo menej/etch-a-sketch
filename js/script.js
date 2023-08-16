@@ -2,13 +2,23 @@ function randomNumber360() {
     return Math.floor(Math.random() * 361);
 }
 
-function randomNumber100() {
-    return Math.floor(Math.random() * 101);
+function decreaseRGBColour(colour) {
+    let RGBArray = colour.match(/\d+/g);
+    RGBArray = RGBArray.map(number => {
+        number -= 25;
+        if (number < 0) number = 0;
+        return number;
+    });
+    return "rgb(" + RGBArray.join(", ") + ")";
 }
+
 function addColour(e) {
     //     e.target.classList.add("coloured")
-    if (!e.target.style.backgroundColor) {
+    let backgroundColor = e.target.style.backgroundColor;
+    if (!backgroundColor) {
         e.target.style.backgroundColor = `rgb(${randomNumber360()}, ${randomNumber360()}, ${randomNumber360()})`;
+    } else {
+        e.target.style.backgroundColor = decreaseRGBColour(backgroundColor);
     }
 
 }
