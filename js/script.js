@@ -21,9 +21,27 @@ function changeSize() {
     }
 }
 
+function addGridBoxes(gridContainer, gridSize) {
+    gridContainer.textContent = "";
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        let box = document.createElement("div");
+        box.classList.add("box");
+        box.style.width = CANVAS_SIZE / gridSize + "px";
+        box.style.height = CANVAS_SIZE / gridSize + "px";
+
+        box.addEventListener("mouseover", addColourClass);
+
+        gridContainer.appendChild(box);
+    }
+}
 
 function updateSize(size) {
+    gridSize = size;
+    let gridContainer = document.querySelector(".grid-container");
+    addGridBoxes(gridContainer, gridSize);
 
+    let gridSizeText = document.querySelector(".menu-container > p");
+    gridSizeText.textContent = `${gridSize}x${gridSize}`;
 }
 
 const CANVAS_SIZE = 960;
@@ -48,18 +66,7 @@ body.appendChild(menuContainer);
 
 let gridContainer = document.createElement("div");
 gridContainer.classList.add("grid-container");
-
-for (let i = 0; i < gridSize * gridSize; i++) {
-    let box = document.createElement("div");
-    box.classList.add("box");
-    box.style.width = CANVAS_SIZE / gridSize + "px";
-    box.style.height = CANVAS_SIZE / gridSize + "px";
-
-    box.addEventListener("mouseover", addColourClass);
-
-    gridContainer.appendChild(box);
-}
-
+addGridBoxes(gridContainer, gridSize);
 body.appendChild(gridContainer);
 
 
